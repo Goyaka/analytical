@@ -35,9 +35,7 @@ module Analytical
       
       def event(name, *args)
         data = args.first || {}
-        data = data[:value] if data.is_a?(Hash)
-        data_string = !data.nil? ? ", #{data}" : ""
-        "_gaq.push(['_trackEvent', \"Event\", \"#{name}\"" + data_string + "]);"
+        "_gaq.push(['_trackEvent', \"#{name}\", #{data.to_json}]);"
       end
       
       def custom_event(category, action, opt_label=nil, opt_value=nil)
